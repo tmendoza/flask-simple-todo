@@ -34,7 +34,7 @@ def init(app):
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
-    @app.route('api/todo/<int:item_id>', methods=['GET'])
+    @app.route('/api/todo/<int:item_id>', methods=['GET'])
     @auth_guard()
     def get_todo(item_id):
         try:

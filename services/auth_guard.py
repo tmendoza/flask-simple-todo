@@ -1,6 +1,6 @@
 # services/auth_guard.py
 
-from flask import request
+from flask import request, jsonify
 from services.jwt_handler import decode_jwt
 
 def check_jwt():
