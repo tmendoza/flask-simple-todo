@@ -67,3 +67,51 @@ curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" http://12
   ... continued
 ]
 ```
+
+## Adding a Todo List item using Curl
+
+```bash
+curl -s -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -H "Authorization: Bearer ${TOKEN}"  --data '{"id":45,"title":"Drop it like its hot","description":"It is very hot.  It has to be dropped and dropped now", "due_date":"2024-01-26", "status":"researching", "category":"Shepard"}' http://127.0.0.1:5000/api/todo
+```
+
+## Retrieving an existing Todo by it's ID
+```bash
+curl -s -X GET -H 'Accept: application/json' -H 'Content-Type: application/json' -H "Authorization: Bearer ${TOKEN}" http://127.0.0.1:5000/api/todo/45 | jq .
+{
+  "category": "Shepard",
+  "description": "It is very hot.  It has to be dropped and dropped now",
+  "due_date": "Fri, 26 Jan 2024 00:00:00 GMT",
+  "id": 45,
+  "status": "researching",
+  "title": "Drop it like its hot"
+}
+```
+
+## Updating a TODO list item by it's id
+
+Lets update the status to pending, and change the category to 'slinky' for item with id '45'
+
+```bash
+curl -s -X PUT -H 'Accept: application/json' -H 'Content-Type: application/json' -H "Authorization: Bearer ${TOKEN}" --data '{"status":"pending", "category":"Slinky"}' http://127.0.0.1:5000/api/todo/45
+```
+
+Now lets re-print the specific item by id to see the changes
+
+```bash
+curl -s -X GET -H 'Accept: application/json' -H 'Content-Type: application/json' -H "Authorization: Bearer ${TOKEN}" http://127.0.0.1:5000/api/todo/45 | jq .
+{
+  "category": "Slinky",
+  "description": "It is very hot.  It has to be dropped and dropped now",
+  "due_date": "Fri, 26 Jan 2024 00:00:00 GMT",
+  "id": 45,
+  "status": "pending",
+  "title": "Drop it like its hot"
+}
+```
+
+## Deleting a todo list item by it's id
+
+```bash
+curl -s -X DELETE -H 'Accept: application/json' -H 'Content-Type: application/json' -H "Authorization: Bearer ${TOKEN}" http://127.0.0.1:5000/api/todo/45 
+{"message":"Todo item deleted successfully."}
+```

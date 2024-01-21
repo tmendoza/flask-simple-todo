@@ -43,7 +43,7 @@ def init(app):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-    @app.route('/todo/<int:item_id>', methods=['PUT'])
+    @app.route('/api/todo/<int:item_id>', methods=['PUT'])
     @auth_guard()
     def update_todo(item_id):
         try:
@@ -53,7 +53,7 @@ def init(app):
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
-    @app.route('/todo/<int:item_id>', methods=['DELETE'])
+    @app.route('/api/todo/<int:item_id>', methods=['DELETE'])
     @auth_guard()
     def delete_todo(item_id):
         try:
